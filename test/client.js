@@ -1421,4 +1421,15 @@ describe('client API', function() {
       });
     });
   });
+
+  describe('Notifications', function() {
+    it('should fail to initialize notifications if client does not belong to a wallet', function(done) {
+      clients[0].seedFromRandom('testnet');
+      clients[0].initNotifications(function(err) {
+        should.exist(err);
+        err.message.should.equal('No wallet to subscribe to');
+        done();
+      });
+    });
+  });
 });
