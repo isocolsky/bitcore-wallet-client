@@ -472,6 +472,21 @@ describe('client API', function() {
     });
   });
 
+  describe('#signMessage', function() {
+    it.only('should sign message with unencrypted pk', function(done) {
+      helpers.createAndJoinWallet(clients, 1, 1, function(w) {
+        clients[0].createAddress(function(err, address) {
+          should.not.exist(err);
+          var signature = clients[0].signMessage('hello world!', address.path);
+          console.log('*** [client.js ln481] address:', address); // TODO
+
+          console.log('*** [client.js ln481] signature:', signature); // TODO
+          done();
+        });
+      });
+    });
+  });
+
   describe('Build & sign txs', function() {
     var masterPrivateKey = 'tprv8ZgxMBicQKsPd8U9aBBJ5J2v8XMwKwZvf8qcu2gLK5FRrsrPeSgkEcNHqKx4zwv6cP536m68q2UD7wVM24zdSCpaJRmpowaeJTeVMXL5v5k';
     var derivedPrivateKey = {
